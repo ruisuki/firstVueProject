@@ -1,7 +1,21 @@
 import { req } from "./config";
-import { address } from './address'
+
+import { worksaddress } from './address'
+
+import { translate } from "./address";
+
+import { engNews } from "./address";
+
 
 
 
 // 封装汉字查询接口
-export const getValrequest = (params) => { return req('get', `${address}`,params) };
+export const getValrequest = (params) => { return req('get', `${worksaddress}`,params) };
+
+
+//封装翻译接口
+export const getTranslate = (params) => { return req('get', `${translate}`,params) };
+
+
+//封装英语文章接口
+export const getEngNews = (params) => { return req('get', `${engNews}`,params)}

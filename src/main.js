@@ -6,7 +6,6 @@ import 'vant/lib/index.css'
 import axios from 'axios';
 // import { Lazyload } from 'vant';
 
-console.log(axios);
 Vue.config.productionTip = false
 Vue.use(Vant)
 

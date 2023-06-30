@@ -1,7 +1,7 @@
 <template>
   <div class="loginPage" v-cloak>
     <logincomp></logincomp>
-    <userability></userability>
+    <userability v-if="isShow"></userability>
   </div>
 </template>
 
@@ -14,6 +14,21 @@ export default {
   components: {
     logincomp,
     userability
+  },
+  data() {
+    return {
+      isShow: false
+    }
+  },
+
+
+  created() {
+    const loggedInUser = localStorage.getItem('NOW');
+    if (!loggedInUser) {
+      this.isShow = false
+    } else {
+      this.isShow = true
+    }
   }
 }
 </script>

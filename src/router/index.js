@@ -16,9 +16,9 @@ const routes = [
     alias: '/',
     name: 'home',
     component: () => import('@/views/home.vue'),
-    children: [
-
-    ],
+    meta: {
+      keepAlive: true
+    }
   },
   {
     path: '/collect',
@@ -51,11 +51,28 @@ const routes = [
     path: '/loginpage',
     name: 'loginpage',
     component: () => import('@/views/loginpage.vue')
+  },
+
+  {
+    path: '/resultpage',
+    name: 'resultpage',
+    component: () => import('@/views/resultpage.vue')
+  },
+  {
+    path: '/notFound',
+    name: 'notfound',
+    component: () => import('@/views/notfound.vue')
+  },
+  {
+    path: '/register',
+    name: 'register',
+    component: () => import('@/views/register.vue')
   }
 ]
 
 const router = new VueRouter({
-  routes
+  routes,
+  mode: 'history',
 })
 
 
