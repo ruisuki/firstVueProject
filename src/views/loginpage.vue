@@ -39,7 +39,8 @@ export default {
 
       if (userInfo) {
         userInfo = JSON.parse(userInfo)
-
+      }else{
+        this.$router.push('/register')
       }
       for (let i = 0; i < userInfo.length; i++) {
         console.log(userInfo[i]);
