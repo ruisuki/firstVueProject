@@ -60,7 +60,7 @@ export default {
       outPicker: false,
 
       // 转义
-      in: '',
+      in: 'auto',
       out: '',
 
       // 公共部分
@@ -101,6 +101,12 @@ export default {
       result: '',
     }
   },
+
+  created() {
+    this.inpConfirm('自动检测')
+    this.outConfirm('中文')
+  },
+
   methods: {
 
     inpConfirm(value) {
