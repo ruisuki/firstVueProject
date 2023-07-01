@@ -9,7 +9,7 @@
     </div>
 
     <div class="detail">
-      <span>长按页面添加到复习列表</span>
+      <span>长按添加到生词本</span>
       <ul>
         <li v-for="item in resultJSON.data.entries">
           <span>◎{{ item.entry }}</span>

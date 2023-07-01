@@ -9,7 +9,7 @@ import { engNews } from "./address";
 
 
 
-// 封装汉字查询接口
+// 封装单词查询接口
 export const getValrequest = (params) => { return req('get', `${worksaddress}`,params) };
 
 

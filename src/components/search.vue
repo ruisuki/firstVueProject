@@ -29,6 +29,8 @@ import { URL_KEY } from '../http/address.js'
 import { getEngNews } from '../http/api.js'
 import { eng_URL_KEY } from '../http/address.js'
 
+import { wordData } from '@/http/wordDate.js'
+
 export default {
 
   name: 'searchcomp',
@@ -39,7 +41,7 @@ export default {
       resultData: '',
       nowDate: '',
       passDate: '',
-      newsData: '',
+      newsData: wordData,
       visibleItems: 10,
     }
   },
@@ -48,7 +50,7 @@ export default {
     console.log(this.nowDate);
     this.passDate = this.getPassDate()
     console.log(this.passDate);
-    this.getEngNews()
+    // this.getEngNews()
   },
 
 
@@ -92,7 +94,11 @@ export default {
 
     async getVal(name) {
       if (this.msg === '') {
-        alert('不可为空');
+        this.$notify({
+            type: 'danger',
+            message: '不可为空',
+            duration: 2000
+          })
         return this.msg = '';
       } else {
         let character = this.msg;
@@ -167,8 +173,9 @@ export default {
       try {
         const res = await getEngNews({
           q: 'techcrunch',
-          from:this.nowDate,
-          sortBy:'publishedAt',
+          from: this.nowDate,
+          sortBy: 'publishedAt',
+          language: 'en',
           apiKey: eng_URL_KEY
         });
         this.newsData = res.data.articles
@@ -227,7 +234,7 @@ export default {
 .titleInfo {
   height: 14rem;
   background-size: cover;
-  background-position-x: -1.875rem;
+  background-position-x: 0rem;
   position: relative;
   padding-left: .625rem;
 }

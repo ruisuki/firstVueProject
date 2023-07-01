@@ -14,7 +14,7 @@ module.exports = defineConfig({
     open: true,
     // 主机地址
     // host: '192.168.27.1',
-    host: process.env.HOST || '127.0.0.1',
+    // host: process.env.HOST || '127.0.0.1',
     // 设置端口
     port: 8080,
     // 是否设置保存代码自动刷新（热更新）

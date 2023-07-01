@@ -57,22 +57,23 @@ export default {
           setTimeout(() => {
             this.$router.push('/home')
           }, 2000)
-        } else {
+          return
+        }} 
           this.$notify({
             type: 'danger',
             message: '登陆失败',
             duration: 2000
           })
+        },
+        onClickLeft() {
+          this.$router.go(-1)
         }
-      }
-    },
+      },
+    
 
-    onClickLeft() {
-      this.$router.go(-1)
-    }
-  },
+  }
 
-}
+
 </script>
 
 <style scoped>

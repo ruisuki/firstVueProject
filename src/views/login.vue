@@ -15,20 +15,36 @@ export default {
     logincomp,
     userability
   },
+  
   data() {
     return {
       isShow: false
     }
   },
+  beforeRouteEnter(to, from, next) {
+    const loggedInUser = localStorage.getItem('NOW');
+    next(vm => {
+      vm.isShow = !!loggedInUser;
+    });
+  },
+
 
 
   created() {
-    const loggedInUser = localStorage.getItem('NOW');
-    if (!loggedInUser) {
-      this.isShow = false
-    } else {
-      this.isShow = true
+    this.checkNOW()
+  },
+
+  methods: {
+    checkNOW() {
+      const loggedInUser = localStorage.getItem('NOW');
+      if (!loggedInUser) {
+        this.isShow = false
+      } else {
+        this.isShow = true
+      }
     }
-  }
+  },
+
+
 }
 </script>

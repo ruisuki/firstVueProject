@@ -4,33 +4,34 @@
     <!-- 顶部样式 -->
     <van-nav-bar title="翻译"></van-nav-bar>
 
-    <!-- 输入框 -->
-    <van-field v-model="works" size="large" @keydown.enter.prevent label="" type="textarea" placeholder="请输入需要翻译的内容"
-      show-word-limit @keydown.enter="toTanslate" />
+    <div class="inpCon">
+      <!-- 输入框 -->
+      <van-field class="textInp" v-model="works" size="large" @keydown.enter.prevent label="" type="textarea"
+        placeholder="请输入需要翻译的内容" show-word-limit @keydown.enter="toTanslate" />
+      <!-- 输入语言 -->
+      <van-field readonly clickable name="picker" :value="inpvalue" label="输入语言" placeholder="点击选择"
+        @click="inpPicker = true" />
+      <van-popup v-model="inpPicker" position="bottom">
+        <van-picker show-toolbar :columns="columns" @confirm="inpConfirm" @cancel="inpPicker = false" />
+      </van-popup>
 
-    <!-- 输入语言 -->
-    <van-field readonly clickable name="picker" :value="inpvalue" label="输入语言" placeholder="点击选择"
-      @click="inpPicker = true" />
-    <van-popup v-model="inpPicker" position="bottom">
-      <van-picker show-toolbar :columns="columns" @confirm="inpConfirm" @cancel="inpPicker = false" />
-    </van-popup>
+      <!-- 目标语言 -->
+      <van-field class="outlan" readonly clickable name="picker" :value="outvalue" label="目标语言" placeholder="点击选择"
+        @click="outPicker = true" />
+      <van-popup v-model="outPicker" position="bottom">
+        <van-picker show-toolbar :columns="columns" @confirm="outConfirm" @cancel="outPicker = false" />
+      </van-popup>
+    </div>
 
-
-    <!-- 目标语言 -->
-    <van-field readonly clickable name="picker" :value="outvalue" label="目标语言" placeholder="点击选择"
-      @click="outPicker = true" />
-    <van-popup v-model="outPicker" position="bottom">
-      <van-picker show-toolbar :columns="columns" @confirm="outConfirm" @cancel="outPicker = false" />
-    </van-popup>
     <!-- 按钮 -->
-    <van-button type="info" @click="toTanslate" :block="true">翻 译</van-button>
-    <br>
+    <div class="subBtn">
+      <van-button  type="info" @click="toTanslate" :block="true">翻 译</van-button>
+    </div>
     <br>
     <div class="showTran" v-if="isShow" v-cloak>
-      <p>译文</p>
-      <div class="Trancontent">
+      <div class="Trancontent" >
         <span>{{ result }}</span>
-
+        <span></span>
       </div>
 
 
@@ -104,16 +105,17 @@ export default {
 
   created() {
     this.inpConfirm('自动检测')
-    this.outConfirm('中文')
+    console.log(this.in);
   },
 
   methods: {
 
     inpConfirm(value) {
+
       this.inpvalue = value;
       this.inpPicker = false;
       this.in = this.inpLan
-      console.log(this.inpvalue, '这是输入语言');
+      console.log(this.inpvalue, '输入语言');
 
     },
 
@@ -121,7 +123,7 @@ export default {
       this.outvalue = value;
       this.outPicker = false;
       this.out = this.outLan
-      console.log(this.outvalue, '这是目标语言');
+      console.log(this.out, '目标语言',);
     },
 
     async toTanslate() {
@@ -260,7 +262,7 @@ export default {
       } else if (this.outvalue == '中文') {
         this.out = 'zh'
         return 'zh';
-      } else if (this.outvalue == '英文') {
+      } else if (this.outvalue == '英语') {
         this.out = 'en';
         return 'en';
       } else if (this.outvalue == '粤语') {
@@ -341,8 +343,6 @@ export default {
       } else if (this.outvalue == '越南语') {
         this.out = 'vie';
         return 'vie';
-      } else {
-        return ''; // 处理其他情况，如果没有匹配的语言
       }
     }
   }
@@ -350,9 +350,33 @@ export default {
 }
 </script>
 
+
 <style scoped>
+.inpCon {
+  margin-top: .3125rem;
+  margin-bottom: 0.5rem;
+  padding: 0 .3125rem ;
+}
+
+.inpCon .textInp {
+  border-radius: 0.3125rem 0.3125rem 0 0;
+}
+
+.inpCon .outlan{
+  border-radius: 0 0 .3125rem .3125rem;
+}
+
+.paperpage {
+  background-color: #e9e9e9;
+  height: 41.6875rem;
+}
+
+.subBtn{
+  padding:0 0.3125rem;
+}
+
 .showTran {
-  height: 15.625rem;
+  height: 21.625rem;
   width: 22.1875rem;
   margin-left: .3125rem;
 }
@@ -361,15 +385,22 @@ export default {
   height: 1.875rem;
   line-height: 1.875rem;
   padding-left: 1.25rem;
-  border-bottom: 0.0313rem solid rgba(111, 111, 111, 0.5);
 }
 
 .showTran .Trancontent {
-  height: 100%;
+  height: 87%;
   width: 100%;
   padding: 0.3125rem;
-  margin-top: 0.625rem;
   border-radius: .3125rem;
-  box-shadow: 0.25rem 0.25rem .4375rem #ccc;
+  overflow: auto;
+  background-color: #fff;
+
+}
+
+.showTran .Trancontent span {
+  display: inline-block;
+  max-width: 100%;
+  word-break: break-word;
+  overflow-wrap: break-word;
 }
 </style>

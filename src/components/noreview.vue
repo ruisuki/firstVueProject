@@ -15,6 +15,8 @@
 </template>
 
 <script>
+import { getValrequest } from '../http/api.js'
+
 export default {
   directives: {
     'long-press': {

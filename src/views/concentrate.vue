@@ -3,7 +3,7 @@
 
     <!-- 路由出口 -->
     <transition :name="transitionName" mode="out-in">
-      <keep-alive>
+      <keep-alive exclude="login">
 
         <router-view />
       </keep-alive>
@@ -136,7 +136,8 @@ export default {
 <style scoped>
 /* 从左到右 */
 .all {
-  overflow: hidden;
+  /* overflow: hidden; */
+  height: 100%;
 }
 
 .fadeLR-enter {

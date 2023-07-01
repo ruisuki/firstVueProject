@@ -55,6 +55,7 @@ export default {
         message:'注册成功',
         duration:3000
       })
+      this.$router.go(-1)
     },
 
     onClickLeft() {
